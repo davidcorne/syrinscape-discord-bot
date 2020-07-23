@@ -16,7 +16,7 @@ bot.on('ready', function () {
 const join = async function (message, args) {
   if (message.member.voice.channel) {
     const connection = await message.member.voice.channel.join()
-    const dispatcher = connection.play('SoundHelix-Song-1.mp3')
+    const dispatcher = connection.play('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')
     dispatcher.on('start', () => {
       console.log('Started playing')
     })
@@ -24,6 +24,8 @@ const join = async function (message, args) {
       console.log('Finished playing')
     })
     dispatcher.on('error', console.error)
+  } else {
+    message.reply('You should be in a voice channel, then send the join command')
   }
 }
 
