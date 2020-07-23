@@ -33,11 +33,20 @@ const end = async function (message, args) {
   }
 }
 
+const setup = async function (message, args) {
+  if (args.length !== 1) {
+    message.reply(`Expected 1 argument to setup, got ${args.length}`)
+  } else {
+    console.log(`Connect to syrinscape with token: ${args[0]}`)
+  }
+}
+
 const prefix = '!'
 
 const commands = {
   join: join,
-  end: end
+  end: end,
+  setup: setup
 }
 
 bot.on('message', async message => {
@@ -47,6 +56,7 @@ bot.on('message', async message => {
   const command = args.shift().toLowerCase()
 
   if (command in commands) {
+    console.log(`Command ${command} called with arguments: ${args}`)
     commands[command](message, args)
   } else {
     message.reply(`unknown command: ${command}`)
