@@ -49,6 +49,6 @@ bot.on('message', async message => {
   if (command in commands) {
     commands[command](message, args)
   } else {
-    // Error here
+    message.reply(`unknown command: ${command}`)
   }
 })
