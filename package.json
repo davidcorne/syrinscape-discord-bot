@@ -1,0 +1,15 @@
+{
+  "name": "syrinscape-discord-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot for playing Syrinscape",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "author": "David Corne (davidcorne@gmail.com)",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  }
+}
