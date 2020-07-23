@@ -13,7 +13,7 @@ bot.on('ready', function () {
   console.log(`Logged in as ${bot.user.tag}!`)
 })
 
-const join = async function (message) {
+const join = async function (message, args) {
   if (message.member.voice.channel) {
     const connection = await message.member.voice.channel.join()
     const dispatcher = connection.play('SoundHelix-Song-1.mp3')
@@ -27,22 +27,28 @@ const join = async function (message) {
   }
 }
 
-const end = async function (message) {
+const end = async function (message, args) {
   if (message.member.voice.channel) {
     await message.member.voice.channel.leave()
   }
 }
 
+const prefix = '!'
+
 const commands = {
-  '!join': join,
-  '!end': end
+  join: join,
+  end: end
 }
 
 bot.on('message', async message => {
-  for (const command in commands) {
-    if (message.content.startsWith(command)) {
-      console.debug(`Command ${command} parsed`)
-      commands[command](message)
-    }
+  if (!message.content.startsWith(prefix) || message.author.bot) return
+
+  const args = message.content.slice(prefix.length).trim().split(/ +/)
+  const command = args.shift().toLowerCase()
+
+  if (command in commands) {
+    commands[command](message, args)
+  } else {
+    // Error here
   }
 })
