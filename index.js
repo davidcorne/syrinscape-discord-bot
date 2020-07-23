@@ -27,8 +27,15 @@ const join = async function (message) {
   }
 }
 
+const end = async function (message) {
+  if (message.member.voice.channel) {
+    await message.member.voice.channel.leave()
+  }
+}
+
 const commands = {
-  '!join': join
+  '!join': join,
+  '!end': end
 }
 
 bot.on('message', async message => {
